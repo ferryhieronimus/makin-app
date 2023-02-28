@@ -29,14 +29,18 @@ const Profile = ({ user, location, isChecked }) => {
   };
 
   const handleClickCloseFriend = () => {
-    isCloseFriend ^ isChecked
-      ? removeCloseFriend()
-      : addCloseFriend();
+    isCloseFriend ^ isChecked ? removeCloseFriend() : addCloseFriend();
     setIsCloseFriend(!isCloseFriend);
-  } 
+  };
 
   return (
-    <Flex gap='4' alignItems='center' flexWrap='no-wrap' maxW={'90%'} className={'adkucaldcnakdjcnaldjcnaldjcnlajdnclajdcnladj'}>
+    <Flex
+      gap='4'
+      alignItems='center'
+      flexWrap='no-wrap'
+      maxW={location === "post" ? "90%" : "100%"}
+      className={"adkucaldcnakdjcnaldjcnaldjcnlajdnclajdcnladj"}
+    >
       {location === "rightbar" && (
         <>
           <Avatar
@@ -44,7 +48,7 @@ const Profile = ({ user, location, isChecked }) => {
             src={user.profileImage}
             userSelect={"none"}
           />
-          <Box minW={'0'}>
+          <Box minW={"0"}>
             <Heading size='sm' align='left' isTruncated>
               {user.name}
             </Heading>
@@ -63,7 +67,7 @@ const Profile = ({ user, location, isChecked }) => {
             to={user.username}
             userSelect={"none"}
           />
-          <Box as={NavLink} to={user.username} minW={'0'}>
+          <Box as={NavLink} to={user.username} minW={"0"}>
             <Heading size='sm' align='left' isTruncated>
               {user.name}
             </Heading>
@@ -98,7 +102,7 @@ const Profile = ({ user, location, isChecked }) => {
             userSelect={"none"}
           />
           {isLargerThan1024 && (
-            <Box as={NavLink} to={user.username} minW={'0'}>
+            <Box as={NavLink} to={user.username} minW={"0"}>
               <Heading size='sm' align='left' isTruncated>
                 {user.name}
               </Heading>
@@ -116,7 +120,7 @@ const Profile = ({ user, location, isChecked }) => {
             src={user.profileImage}
             userSelect={"none"}
           />
-          <Box minW={'0'} onClick={handleClickCloseFriend}>
+          <Box minW={"0"} onClick={handleClickCloseFriend}>
             <Heading size='sm' align='left' isTruncated>
               {user.name}
             </Heading>
