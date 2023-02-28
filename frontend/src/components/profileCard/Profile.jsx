@@ -38,7 +38,7 @@ const Profile = ({ user, location, isChecked }) => {
       gap='4'
       alignItems='center'
       flexWrap='no-wrap'
-      maxW={location === "post" ? "90%" : "100%"}
+      maxW={location === "post" || location === "about" ? "85%" : "100%"}
       className={"adkucaldcnakdjcnaldjcnaldjcnlajdnclajdcnladj"}
     >
       {location === "rightbar" && (
@@ -84,8 +84,8 @@ const Profile = ({ user, location, isChecked }) => {
             src={user.profileImage}
             userSelect={"none"}
           />
-          <Box>
-            <Heading size='sm' align='left'>
+          <Box minW={"0"}>
+            <Heading size='sm' align='left' isTruncated>
               {user.name}
             </Heading>
             <Text color='gray.500' align='left'>
