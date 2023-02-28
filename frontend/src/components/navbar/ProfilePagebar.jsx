@@ -17,7 +17,7 @@ const ProfilePageHeader = ({ username, mx }) => {
           expiredSessionToast();
         }
       });
-  }, [username, expiredSessionToast]);
+  }, [username]);
 
   return (
     <Box

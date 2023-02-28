@@ -19,7 +19,7 @@ const getAllPost = async (limit) => {
   const config = {
     headers: { Authorization: token },
   };
-  const response = await axios.get(`${baseUrl}?limit=${limit}&skip=0`, config);
+  const response = await axios.get(`${baseUrl}?limit=0&skip=0`, config);
   return response.data;
 };
 

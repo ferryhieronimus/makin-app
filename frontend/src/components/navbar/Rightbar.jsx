@@ -18,7 +18,7 @@ const Rightbar = () => {
           expiredSessionToast();
         }
       });
-  }, [expiredSessionToast]);
+  }, []);
 
   return (
     <Flex
