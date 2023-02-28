@@ -6,6 +6,8 @@ import Post from "../components/postCard/Post";
 import PostService from "../services/PostServices";
 import { useMediaQuery } from "@chakra-ui/react";
 import InfiniteScroll from "react-infinite-scroll-component";
+import CustomToast from "../components/utils/CustomToast";
+import Cookies from "js-cookie";
 
 const Home = () => {
   const { posts, setPosts } = useContext(PostContext);
@@ -13,6 +15,14 @@ const Home = () => {
   const { currentUser } = useContext(PostContext);
 
   const [isLargerThan624] = useMediaQuery("(min-width: 624px)");
+
+  const { expiredSessionToast } = CustomToast();
+  const tokenExpiredError = "token expired";
+
+  const handleLogOut = () => {
+    Cookies.remove('loggedUser')
+    window.location.reload();
+  };
 
   const resultValidator = (post) => {
     return post.isCloseFriend &&
@@ -24,9 +34,18 @@ const Home = () => {
 
   useEffect(() => {
     if (currentUser !== undefined) {
-      PostService.getPost(limit).then((initialPosts) => {
-        setPosts(initialPosts); 
-      });
+      PostService.getPost(limit)
+        .then((initialPosts) => {
+          setPosts(initialPosts);
+        })
+        .catch((error) => {
+          if (error.response.data.error === tokenExpiredError) {
+            setTimeout(() => {
+              handleLogOut();
+            }, "2000");
+            expiredSessionToast()
+          }
+        });
     } else {
       PostService.getPostForAnonymous().then((initialPosts) => {
         setPosts(initialPosts);

@@ -14,6 +14,8 @@ import ProfilePageHeader from "../components/navbar/ProfilePagebar";
 import { useParams } from "react-router-dom";
 import { IoSearchOutline } from "react-icons/io5";
 import { PostContext } from "../App";
+import CustomToast from "../components/utils/CustomToast";
+import Cookies from "js-cookie";
 
 const About = () => {
   const { posts, setPosts, currentUser } = useContext(PostContext);
@@ -22,13 +24,14 @@ const About = () => {
 
   const thisUserPosts = posts.filter((post) => post.user.username === username);
 
-  useEffect(() => {
-    PostService.getAllPost().then((initialPosts) => {
-      setPosts(initialPosts);
-    });
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [setPosts]); 
+  const { expiredSessionToast } = CustomToast();
+  const tokenExpiredError = "token expired";
 
+  const handleLogOut = () => {
+    Cookies.remove('loggedUser')
+    window.location.reload();
+  };
+  
   const resultValidator = (post) => {
     return post.isCloseFriend &&
       post.user.id !== currentUser.id &&
@@ -36,6 +39,20 @@ const About = () => {
       <Post key={post.id} post={post} location='about' />
     );
   };
+
+  useEffect(() => {
+    PostService.getAllPost().then((initialPosts) => {
+      setPosts(initialPosts);
+    }).catch((error) => {
+      if (error.response.data.error === tokenExpiredError) {
+        setTimeout(() => {
+          handleLogOut();
+        }, "2000");
+        expiredSessionToast()
+      }
+    });
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [setPosts]); 
 
   return (
     <Grid

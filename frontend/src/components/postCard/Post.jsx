@@ -1,14 +1,14 @@
 import { Card, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
-import { Flex, Text, IconButton, Spacer } from "@chakra-ui/react";
+import { Flex, Text, IconButton, Spacer, Icon } from "@chakra-ui/react";
 import { useContext, useState } from "react";
 import Dropdown from "./Dropdown";
 import Profile from "../profileCard/Profile";
 import Moment from "react-moment";
 import { PostContext } from "../../App";
-
+import { MdStars } from "react-icons/md";
 import CustomToast from "../utils/CustomToast";
 import PostService from "../../services/PostServices";
-import Cookies from 'js-cookie'
+import Cookies from "js-cookie";
 
 const Post = ({ post, location }) => {
   const { posts, setPosts, currentUser } = useContext(PostContext);
@@ -25,7 +25,7 @@ const Post = ({ post, location }) => {
   };
 
   const handleLogOut = () => {
-    Cookies.remove('loggedUser')
+    Cookies.remove("loggedUser");
     window.location.reload();
   };
 
@@ -71,10 +71,7 @@ const Post = ({ post, location }) => {
     >
       <CardHeader>
         <Flex justifyContent={"space-between"} alignItems={"center"}>
-          <Profile
-            user={post.user}
-            location={location}
-          />
+          <Profile user={post.user} location={location} />
 
           {currentUser !== undefined && post.user.id === currentUser.id ? (
             <IconButton
@@ -101,7 +98,8 @@ const Post = ({ post, location }) => {
         </Text>
       </CardBody>
 
-      <CardFooter>
+      <CardFooter alignItems={"center"}>
+        {post.isCloseFriend && <Icon as={MdStars} color={"purple.500"}></Icon>}
         <Spacer />
         {post.createdAt === post.updatedAt && (
           <Text align='right' color='gray.500' fontSize='sm'>
