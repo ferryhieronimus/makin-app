@@ -22,6 +22,7 @@ const Create = ({ isOpen, onClose }) => {
   const { posts, setPosts } = useContext(PostContext);
   const [isCloseFriend, setIsCloseFriend] = useState(false);
   const { expiredSessionToast, createPostToast } = CustomToast();
+  const [isClicked, setIsClicked] = useState(false);
 
   const handleLogOut = () => {
     Cookies.remove("loggedUser");
@@ -29,9 +30,8 @@ const Create = ({ isOpen, onClose }) => {
   };
 
   const handleOnClick = () => {
+    setIsClicked(true);
     addPost({ content: newPost, isCloseFriend: isCloseFriend });
-    setNewPost("");
-    onClose();
   };
 
   const prepend = (oldArray, value) => {
@@ -45,6 +45,9 @@ const Create = ({ isOpen, onClose }) => {
       .then((returnedPost) => {
         setPosts(prepend(posts, returnedPost));
         createPostToast();
+        setIsClicked(false);
+        setNewPost("");
+        onClose();
       })
       .catch((error) => {
         setTimeout(() => {
@@ -91,6 +94,7 @@ const Create = ({ isOpen, onClose }) => {
             colorScheme='purple'
             ml={3}
             onClick={handleOnClick}
+            isLoading={isClicked}
           >
             Send
           </Button>
