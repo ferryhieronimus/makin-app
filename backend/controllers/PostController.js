@@ -11,6 +11,17 @@ module.exports.getPost = async (request, response) => {
   response.json(posts);
 };
 
+module.exports.getPostForAnonymous = async (request, response) => {
+  const posts = await Post.find({
+    isCloseFriend: false,
+  })
+    .populate("user")
+    .sort({ createdAt: -1 })
+    .limit(5);
+
+  response.json(posts);
+};
+
 module.exports.getPostByUserID = async (request, response) => {
   const posts = await Post.find({
     user: request.params.id,

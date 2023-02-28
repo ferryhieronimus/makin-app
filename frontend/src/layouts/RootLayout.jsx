@@ -3,7 +3,7 @@ import { Grid, GridItem, Spinner, Flex } from "@chakra-ui/react";
 import { useContext } from "react";
 import Leftbar from "../components/navbar/Leftbar";
 import Rightbar from "../components/navbar/Rightbar";
-import LoginHome from "../pages/LoginHome";
+import Home from "../pages/Home";
 import Bottombar from "../components/navbar/Bottombar";
 import Div100vh from "react-div-100vh";
 import { useMediaQuery } from "@chakra-ui/react";
@@ -88,7 +88,7 @@ const RootLayout = () => {
           </GridItem>
           {isLargerThan902 && (
             <GridItem overflow={"auto"}>
-              <LoginHome />
+              <Home />
             </GridItem>
           )}
         </Grid>

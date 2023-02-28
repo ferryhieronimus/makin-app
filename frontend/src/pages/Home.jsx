@@ -26,9 +26,15 @@ const Home = () => {
   };
 
   useEffect(() => {
-    PostService.getPost(limit).then((initialPosts) => {
-      setPosts(initialPosts); 
-    });
+    if (currentUser !== undefined) {
+      PostService.getPost(limit).then((initialPosts) => {
+        setPosts(initialPosts); 
+      });
+    } else {
+      PostService.getPostForAnonymous().then((initialPosts) => {
+        setPosts(initialPosts);
+      });
+    }
   }, [limit, setPosts]);
 
   return (

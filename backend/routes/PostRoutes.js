@@ -4,6 +4,8 @@ const { authorization } = require("../middleware/middleware");
 
 postRouter.get("/", PostController.getPost);
 
+postRouter.get("/anonymous", PostController.getPostForAnonymous);
+
 postRouter.get("/:id", PostController.getPostByUserID);
 
 postRouter.post("/", authorization, PostController.createPost);

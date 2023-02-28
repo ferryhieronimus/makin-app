@@ -15,11 +15,16 @@ const getPost = async (limit) => {
   return response.data;
 };
 
-const getAllPost = async () => {
+const getAllPost = async (limit) => {
   const config = {
     headers: { Authorization: token },
   };
-  const response = await axios.get(baseUrl, config);
+  const response = await axios.get(`${baseUrl}?limit=${limit}&skip=0`, config);
+  return response.data;
+};
+
+const getPostForAnonymous= async () => {
+  const response = await axios.get(`${baseUrl}/anonymous`);
   return response.data;
 };
 
@@ -56,6 +61,7 @@ const Services = {
   setToken,
   getPost,
   getPostByUserID,
+  getPostForAnonymous,
   getAllPost,
   createPost,
   updatePost,
