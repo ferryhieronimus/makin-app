@@ -11,7 +11,7 @@ import {
 import { NavLink } from "react-router-dom";
 import { PostContext } from "../../App";
 
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState } from "react";
 import UserServices from "../../services/UserServices";
 
 const Profile = ({ user, location, isChecked }) => {

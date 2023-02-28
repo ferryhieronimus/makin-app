@@ -22,7 +22,7 @@ const LoginHome = () => {
     PostService.getPost(limit).then((initialPosts) => {
       setPosts(initialPosts);
     });
-  }, [limit]);
+  }, [limit, setPosts]);
 
   return (
     <Grid
