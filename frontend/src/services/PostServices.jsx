@@ -28,11 +28,6 @@ const getPostForAnonymous= async () => {
   return response.data;
 };
 
-const getPostByUserID = async (id) => {
-  const response = await axios.get(`${baseUrl}/${id}`);
-  return response.data;
-};
-
 const createPost = async (newObject) => {
   const config = {
     headers: { Authorization: token },
@@ -60,7 +55,6 @@ const deletePost = async (id) => {
 const Services = {
   setToken,
   getPost,
-  getPostByUserID,
   getPostForAnonymous,
   getAllPost,
   createPost,
