@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseUrl = "/api/posts";
+const baseUrl = "https://makin-app.up.railway.app/api/posts";
 
 let token = null;
 
