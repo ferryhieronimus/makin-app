@@ -70,7 +70,7 @@ const Post = ({ post, location }) => {
       boxShadow={post.isCloseFriend && "0 0 12px #9F7AEA"}
     >
       <CardHeader>
-        <Flex justifyContent={"space-between"} alignItems={"center"}>
+        <Flex justifyContent={"space-between"} alignItems={"center"} maxW={'100%'}>
           <Profile user={post.user} location={location} />
 
           {currentUser !== undefined && post.user.id === currentUser.id ? (

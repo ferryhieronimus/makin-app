@@ -36,7 +36,7 @@ const Profile = ({ user, location, isChecked }) => {
   } 
 
   return (
-    <Flex gap='4' alignItems='center' flexWrap='no-wrap' maxW={'100%'} className={'adkucaldcnakdjcnaldjcnaldjcnlajdnclajdcnladj'}>
+    <Flex gap='4' alignItems='center' flexWrap='no-wrap' maxW={'90%'} className={'adkucaldcnakdjcnaldjcnaldjcnlajdnclajdcnladj'}>
       {location === "rightbar" && (
         <>
           <Avatar
@@ -44,8 +44,8 @@ const Profile = ({ user, location, isChecked }) => {
             src={user.profileImage}
             userSelect={"none"}
           />
-          <Box>
-            <Heading size='sm' align='left' isTruncated maxW={"9rem"}>
+          <Box minW={'0'}>
+            <Heading size='sm' align='left' isTruncated>
               {user.name}
             </Heading>
             <Text color='gray.500' align='left'>
@@ -63,8 +63,8 @@ const Profile = ({ user, location, isChecked }) => {
             to={user.username}
             userSelect={"none"}
           />
-          <Box as={NavLink} to={user.username}>
-            <Heading size='sm' align='left'>
+          <Box as={NavLink} to={user.username} minW={'0'}>
+            <Heading size='sm' align='left' isTruncated>
               {user.name}
             </Heading>
             <Text color='gray.500' align='left'>
@@ -91,14 +91,14 @@ const Profile = ({ user, location, isChecked }) => {
         </>
       )}
       {location === "leftbar" && (
-        <Flex gap={4} maxW={"70%"}>
+        <Flex gap={4} maxW={"100%"}>
           <Avatar
             name={user.name}
             src={user.profileImage}
             userSelect={"none"}
           />
           {isLargerThan1024 && (
-            <Box as={NavLink} to={user.username} maxW={"100%"}>
+            <Box as={NavLink} to={user.username} minW={'0'}>
               <Heading size='sm' align='left' isTruncated>
                 {user.name}
               </Heading>
@@ -116,7 +116,7 @@ const Profile = ({ user, location, isChecked }) => {
             src={user.profileImage}
             userSelect={"none"}
           />
-          <Box maxW={'60%'} onClick={handleClickCloseFriend}>
+          <Box minW={'0'} onClick={handleClickCloseFriend}>
             <Heading size='sm' align='left' isTruncated>
               {user.name}
             </Heading>
