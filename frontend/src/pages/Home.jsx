@@ -15,9 +15,6 @@ const Home = () => {
   const [isLargerThan624] = useMediaQuery("(min-width: 624px)");
 
   const resultValidator = (post) => {
-    if (!currentUser) {
-      return null
-    }
     return post.isCloseFriend &&
       post.user.id !== (currentUser && currentUser.id) &&
       !post.user.closeFriends.includes(currentUser.id) ? null : (
