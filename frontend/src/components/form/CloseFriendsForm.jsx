@@ -60,12 +60,14 @@ const CloseFriends = ({ isOpen, onClose }) => {
                         bg: "gray.100",
                       }}
                       key={user.id}
+                      maxW={'100%'}
                     >
                       <Profile
                         user={user}
                         location={"closefriend"}
                         key={user.id}
                         isChecked={currentUser.closeFriends.includes(user.id)}
+                        maxW={"100%"}
                       />
                     </Box>
                   )

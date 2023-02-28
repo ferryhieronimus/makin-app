@@ -33,9 +33,11 @@ const ProfilePageHeader = ({ username, mx }) => {
           name={profileUsers && profileUsers.name}
           src={profileUsers && profileUsers.profileImage}
           size={"2xl"}
+          cursor='pointer'
+          userSelect={'none'}
         />
-        <Box>
-          <Heading as='h3' size='lg'>
+        <Box maxW={'100%'}>
+          <Heading as='h3' size='lg' isTruncated>
             {profileUsers && profileUsers.name}
           </Heading>
           <Text color='gray.500'>@{username}</Text>

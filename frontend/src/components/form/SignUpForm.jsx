@@ -27,10 +27,14 @@ const SignUpForm = () => {
 
   const handleClick = () => setShow(!show);
 
+  const nameTooLong = "Names can be no more than 60 characters long";
   const usernameError = "This username is already taken";
-  const usernameInvalid = "This username contains illegal character"
+  const usernameInvalid = "This username contains illegal character";
+  const usernameTooLong = "Usernames can be no more than 15 characters long";
   const passwordError = "Password must be at least 8 characters long";
   const isPasswordError = password.length < 8 && password.length !== 0;
+  const isUsernameTooLong = username.length > 15;
+  const isNameTooLong = name.length > 60;
 
   const isUsernameInvalid = (val) => {
     const usernameRegex = /^$|^[a-z0-9_.]+$/;
@@ -60,16 +64,18 @@ const SignUpForm = () => {
     }
   };
 
-
   return (
     <form onSubmit={handleSignUp}>
-      <FormControl isRequired>
+      <FormControl isRequired isInvalid={isNameTooLong}>
         <FormLabel mt='4'>Full Name</FormLabel>
         <Input value={name} onChange={({ target }) => setName(target.value)} />
+        {isNameTooLong && <FormErrorMessage>{nameTooLong}</FormErrorMessage>}
       </FormControl>
 
       <FormControl
-        isInvalid={isUsernameError || isUsernameInvalid(username)}
+        isInvalid={
+          isUsernameError || isUsernameInvalid(username) || isUsernameTooLong
+        }
         isRequired
       >
         <FormLabel mt='4'>Username</FormLabel>
@@ -80,6 +86,9 @@ const SignUpForm = () => {
         />
         {isUsernameError && (
           <FormErrorMessage>{usernameError}</FormErrorMessage>
+        )}
+        {isUsernameTooLong && (
+          <FormErrorMessage>{usernameTooLong}</FormErrorMessage>
         )}
         {isUsernameInvalid(username) && (
           <FormErrorMessage>{usernameInvalid}</FormErrorMessage>
@@ -110,7 +119,12 @@ const SignUpForm = () => {
 
       <Button
         colorScheme='purple'
-        isDisabled={isPasswordError}
+        isDisabled={
+          isPasswordError ||
+          isUsernameTooLong ||
+          isNameTooLong ||
+          isUsernameInvalid
+        }
         isLoading={isClicked}
         type='submit'
         my={8}

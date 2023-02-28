@@ -28,11 +28,22 @@ const Profile = ({ user, location, isChecked }) => {
     UserServices.removeCloseFriend(currentUser.id, { closeFriend: user.id });
   };
 
+  const handleClickCloseFriend = () => {
+    isCloseFriend ^ isChecked
+      ? removeCloseFriend()
+      : addCloseFriend();
+    setIsCloseFriend(!isCloseFriend);
+  } 
+
   return (
-    <Flex gap='4' alignItems='center' flexWrap='no-wrap'>
+    <Flex gap='4' alignItems='center' flexWrap='no-wrap' maxW={'100%'} className={'adkucaldcnakdjcnaldjcnaldjcnlajdnclajdcnladj'}>
       {location === "rightbar" && (
         <>
-          <Avatar name={user.name} src={user.profileImage}/>
+          <Avatar
+            name={user.name}
+            src={user.profileImage}
+            userSelect={"none"}
+          />
           <Box>
             <Heading size='sm' align='left' isTruncated maxW={"9rem"}>
               {user.name}
@@ -45,7 +56,13 @@ const Profile = ({ user, location, isChecked }) => {
       )}
       {location === "post" && (
         <>
-          <Avatar name={user.name} src={user.profileImage} as={NavLink} to={user.username} />
+          <Avatar
+            name={user.name}
+            src={user.profileImage}
+            as={NavLink}
+            to={user.username}
+            userSelect={"none"}
+          />
           <Box as={NavLink} to={user.username}>
             <Heading size='sm' align='left'>
               {user.name}
@@ -58,7 +75,11 @@ const Profile = ({ user, location, isChecked }) => {
       )}
       {location === "about" && (
         <>
-          <Avatar name={user.name} src={user.profileImage}/>
+          <Avatar
+            name={user.name}
+            src={user.profileImage}
+            userSelect={"none"}
+          />
           <Box>
             <Heading size='sm' align='left'>
               {user.name}
@@ -70,25 +91,33 @@ const Profile = ({ user, location, isChecked }) => {
         </>
       )}
       {location === "leftbar" && (
-        <>
-          <Avatar name={user.name} src={user.profileImage}/>
+        <Flex gap={4} maxW={"70%"}>
+          <Avatar
+            name={user.name}
+            src={user.profileImage}
+            userSelect={"none"}
+          />
           {isLargerThan1024 && (
-            <Box as={NavLink} to={user.username}>
-              <Heading size='sm' align='left'>
+            <Box as={NavLink} to={user.username} maxW={"100%"}>
+              <Heading size='sm' align='left' isTruncated>
                 {user.name}
               </Heading>
-              <Text color='gray.500' align='left'>
+              <Text color='gray.500' align='left' isTruncated>
                 @{user.username}
               </Text>
             </Box>
           )}
-        </>
+        </Flex>
       )}
       {location === "closefriend" && (
         <>
-          <Avatar name={user.name} src={user.profileImage}/>
-          <Box>
-            <Heading size='sm' align='left'>
+          <Avatar
+            name={user.name}
+            src={user.profileImage}
+            userSelect={"none"}
+          />
+          <Box maxW={'60%'} onClick={handleClickCloseFriend}>
+            <Heading size='sm' align='left' isTruncated>
               {user.name}
             </Heading>
             <Text color='gray.500' align='left'>
@@ -100,12 +129,7 @@ const Profile = ({ user, location, isChecked }) => {
             size='lg'
             colorScheme='purple'
             isChecked={isCloseFriend ^ isChecked}
-            onChange={() => {
-              isCloseFriend ^ isChecked
-                ? removeCloseFriend()
-                : addCloseFriend();
-              setIsCloseFriend(!isCloseFriend);
-            }}
+            onChange={handleClickCloseFriend}
           />
         </>
       )}

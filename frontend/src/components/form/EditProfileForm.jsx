@@ -37,10 +37,14 @@ const EditProfileForm = ({ user, context }) => {
   const [editImage, setEditImage] = useState("");
   const [file, setFile] = useState(false);
   const hiddenFileInput = useRef(null);
-
   const { accountUpdatedToast, expiredSessionToast } = CustomToast();
 
+  const nameTooLong = "Names can be no more than 60 characters long";
   const usernameError = "This username is already taken";
+  const usernameInvalid = "This username contains illegal character";
+  const usernameTooLong = "Usernames can be no more than 15 characters long";
+  const isUsernameTooLong = username.length > 15;
+  const isNameTooLong = name.length > 60;
 
   const handleLogOut = () => {
     Cookies.remove("loggedUser");
@@ -138,21 +142,40 @@ const EditProfileForm = ({ user, context }) => {
     return () => URL.revokeObjectURL(objectUrl);
   }, [file]);
 
+  const isUsernameInvalid = (val) => {
+    const usernameRegex = /^$|^[a-z0-9_.]+$/;
+    return !usernameRegex.test(val);
+  };
+
   return (
     <>
       <Tooltip hasArrow label='Change Picture'>
-        <Avatar name={name} src={image} size={"2xl"} onClick={onOpen} />
+        <Avatar
+          name={name}
+          src={image}
+          size={"2xl"}
+          onClick={onOpen}
+          userSelect={"none"}
+          cursor={"pointer"}
+        />
       </Tooltip>
 
       <form onSubmit={handleUpdateProfile}>
-        <FormControl isRequired>
+        <FormControl isRequired isInvalid={isNameTooLong}>
           <FormLabel mt='4'>Full Name</FormLabel>
           <Input
             value={name}
             onChange={({ target }) => setName(target.value)}
           />
+          {isNameTooLong && <FormErrorMessage>{nameTooLong}</FormErrorMessage>}
         </FormControl>
-        <FormControl isInvalid={isUsernameError} isRequired>
+
+        <FormControl
+          isInvalid={
+            isUsernameError || isUsernameInvalid(username) || isUsernameTooLong
+          }
+          isRequired
+        >
           <FormLabel mt='4'>Username</FormLabel>
           <Input
             value={username}
@@ -161,6 +184,12 @@ const EditProfileForm = ({ user, context }) => {
           />
           {isUsernameError && (
             <FormErrorMessage>{usernameError}</FormErrorMessage>
+          )}
+          {isUsernameTooLong && (
+            <FormErrorMessage>{usernameTooLong}</FormErrorMessage>
+          )}
+          {isUsernameInvalid(username) && (
+            <FormErrorMessage>{usernameInvalid}</FormErrorMessage>
           )}
         </FormControl>
         <FormControl>
@@ -178,6 +207,7 @@ const EditProfileForm = ({ user, context }) => {
           my={8}
           w={"50%"}
           borderRadius={"2xl"}
+          isDisabled={isUsernameTooLong || isNameTooLong || isUsernameInvalid}
         >
           Save
         </Button>
@@ -202,7 +232,7 @@ const EditProfileForm = ({ user, context }) => {
                   onChange={handleChange}
                   style={{ display: "none" }}
                   ref={hiddenFileInput}
-                  accept="image/*"
+                  accept='image/*'
                 />
               </FormControl>
             </ModalBody>
