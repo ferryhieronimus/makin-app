@@ -26,7 +26,7 @@ module.exports.getUserByUsername = async (request, response) => {
   console.log(request.params.username);
   const user = await User.findOne({
     username: request.params.username,
-  })
+  });
 
   if (user) {
     response.json(user);
@@ -59,7 +59,7 @@ module.exports.createUser = async (request, response) => {
   response.status(201).json(savedUser);
 };
 
-module.exports.updateUser = async (request, response) => { 
+module.exports.updateUser = async (request, response) => {
   const { username, name, bio } = request.body;
 
   const existingUser = await User.findOne({ username: username });

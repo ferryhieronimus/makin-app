@@ -5,7 +5,7 @@ const postSchema = new mongoose.Schema(
     content: {
       type: String,
       required: true,
-      maxlength: 400
+      maxlength: 400,
     },
     user: {
       type: mongoose.ObjectId,
@@ -13,7 +13,7 @@ const postSchema = new mongoose.Schema(
     },
     isCloseFriend: {
       type: Boolean,
-      default: false
+      default: false,
     },
   },
   {
