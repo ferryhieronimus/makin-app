@@ -60,7 +60,7 @@ const CloseFriends = ({ isOpen, onClose }) => {
                         bg: "gray.100",
                       }}
                       key={user.id}
-                      maxW={'100%'}
+                      maxW={"100%"}
                     >
                       <Profile
                         user={user}
@@ -79,7 +79,10 @@ const CloseFriends = ({ isOpen, onClose }) => {
           <Button
             colorScheme='purple'
             mx={"auto"}
-            onClick={() => {onClose(); window.location.reload()}}
+            onClick={() => {
+              onClose();
+              window.location.reload();
+            }}
             borderRadius={"2xl"}
           >
             Save

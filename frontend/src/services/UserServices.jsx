@@ -1,5 +1,6 @@
 import axios from "axios";
-const baseUrl = "https://makin-app.up.railway.app/api/users";
+import config from "../utils/config";
+const baseUrl = config + "/api/users";
 
 let token = null;
 
@@ -12,7 +13,8 @@ const getUser = async (limit, username) => {
     headers: { Authorization: token },
   };
   const response = await axios.get(
-    `${baseUrl}?limit=${limit}&skip=0&username=${username}`, config
+    `${baseUrl}?limit=${limit}&skip=0&username=${username}`,
+    config
   );
   return response.data;
 };

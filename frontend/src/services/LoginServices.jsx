@@ -1,5 +1,6 @@
 import axios from "axios";
-const baseUrl = "https://makin-app.up.railway.app/api/login";
+import config from "../utils/config";
+const baseUrl = config + "/api/login"
 
 const login = async (credentials) => {
   const response = await axios.post(baseUrl, credentials);

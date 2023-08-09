@@ -20,7 +20,7 @@ const Home = () => {
   const tokenExpiredError = "token expired";
 
   const handleLogOut = () => {
-    Cookies.remove('loggedUser')
+    Cookies.remove("loggedUser");
     window.location.reload();
   };
 
@@ -43,7 +43,7 @@ const Home = () => {
             setTimeout(() => {
               handleLogOut();
             }, "2000");
-            expiredSessionToast()
+            expiredSessionToast();
           }
         });
     } else {

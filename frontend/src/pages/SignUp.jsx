@@ -23,6 +23,6 @@ const SignUp = () => {
       <SignUpForm />
     </Stack>
   );
-}; 
+};
 
 export default SignUp;

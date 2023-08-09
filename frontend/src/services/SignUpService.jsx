@@ -1,5 +1,6 @@
 import axios from "axios";
-const baseUrl = "https://makin-app.up.railway.app/api/users";
+import config from "../utils/config";
+const baseUrl = config + "/api/users"
 
 const signup = async (credentials) => {
   const response = await axios.post(baseUrl, credentials);
@@ -7,4 +8,3 @@ const signup = async (credentials) => {
 };
 
 export default { signup };
- 

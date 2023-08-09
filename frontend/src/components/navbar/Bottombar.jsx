@@ -23,7 +23,7 @@ import CloseFriends from "../form/CloseFriendsForm";
 import { PostContext } from "../../App";
 
 import { useContext } from "react";
-import Cookies from 'js-cookie'
+import Cookies from "js-cookie";
 
 const Bottombar = () => {
   const { currentUser } = useContext(PostContext);
@@ -56,8 +56,7 @@ const Bottombar = () => {
         icon={FaStar}
         isCloseFriend={true}
       />
-      <BottombarProfile
-      />
+      <BottombarProfile />
     </Flex>
   );
 };

@@ -13,10 +13,10 @@ import EditProfile from "./pages/EditProfile";
 import RootLayout from "./layouts/RootLayout";
 import { ProtectedLogin, RedirectToHome } from "./components/utils/Redirector";
 import { extendTheme } from "@chakra-ui/react";
-import { useState, useEffect, createContext  } from "react";
+import { useState, useEffect, createContext } from "react";
 import UserServices from "./services/UserServices";
 import PostService from "./services/PostServices";
-import Cookies from 'js-cookie'
+import Cookies from "js-cookie";
 
 const router = createBrowserRouter(
   createRoutesFromElements(

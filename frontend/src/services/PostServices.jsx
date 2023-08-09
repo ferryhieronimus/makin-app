@@ -1,5 +1,6 @@
 import axios from "axios";
-const baseUrl = "https://makin-app.up.railway.app/api/posts";
+import config from "../utils/config";
+const baseUrl = config + "/api/posts"
 
 let token = null;
 
@@ -23,7 +24,7 @@ const getAllPost = async (limit) => {
   return response.data;
 };
 
-const getPostForAnonymous= async () => {
+const getPostForAnonymous = async () => {
   const response = await axios.get(`${baseUrl}/anonymous`);
   return response.data;
 };

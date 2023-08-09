@@ -28,10 +28,10 @@ const About = () => {
   const tokenExpiredError = "token expired";
 
   const handleLogOut = () => {
-    Cookies.remove('loggedUser')
+    Cookies.remove("loggedUser");
     window.location.reload();
   };
-  
+
   const resultValidator = (post) => {
     return post.isCloseFriend &&
       post.user.id !== currentUser.id &&
@@ -41,18 +41,20 @@ const About = () => {
   };
 
   useEffect(() => {
-    PostService.getAllPost().then((initialPosts) => {
-      setPosts(initialPosts);
-    }).catch((error) => {
-      if (error.response.data.error === tokenExpiredError) {
-        setTimeout(() => {
-          handleLogOut();
-        }, "2000");
-        expiredSessionToast()
-      }
-    });
+    PostService.getAllPost()
+      .then((initialPosts) => {
+        setPosts(initialPosts);
+      })
+      .catch((error) => {
+        if (error.response.data.error === tokenExpiredError) {
+          setTimeout(() => {
+            handleLogOut();
+          }, "2000");
+          expiredSessionToast();
+        }
+      });
     window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [setPosts]); 
+  }, [setPosts]);
 
   return (
     <Grid

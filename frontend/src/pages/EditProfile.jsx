@@ -4,9 +4,8 @@ import { useMediaQuery } from "@chakra-ui/react";
 import { useContext } from "react";
 import { PostContext } from "../App";
 
-
 const EditProfile = () => {
-  const { currentUser } = useContext(PostContext)
+  const { currentUser } = useContext(PostContext);
   const [isLargerThan624] = useMediaQuery("(min-width: 624px)");
   window.scrollTo({ top: 0, behavior: "smooth" });
 
