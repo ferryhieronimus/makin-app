@@ -47,5 +47,5 @@ const ProfilePageHeader = ({ username, mx }) => {
     </Box>
   );
 };
-
+ 
 export default ProfilePageHeader;
